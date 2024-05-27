@@ -3,7 +3,7 @@
 // icon-color: cyan; icon-glyph: magic;
 ///<reference path="../index.d.ts" />
 
-// This is super cool text added in the update
+// This has the updated code...
 
 let files = {
     resetDate: {
@@ -261,7 +261,7 @@ function editHistory(oldEntry, newEntry) {
 		addToHistory(newEntry)
 		return;
 	}
-
+	
 	histData[location] = newEntry
 	saveHistory(histData)
 
@@ -302,23 +302,18 @@ async function update() {
 	console.log("Updating")
 
 	try {
-		// Construct the URL to the raw content of the script on GitHub
-		const url = `test`;
+		const url = `https://raw.githubusercontent.com/ChickenNuggetsPerson/ScriptableScripts/main/Count%20Up%20Widget.js`;
 		
-		// Make an HTTP request to get the script content
 		const req = new Request(url);
 		const scriptContent = await req.loadString();
-		
-		console.log(scriptContent)
 
-		return; 
-		
 		const dir = fm.documentsDirectory();
-		const path = fm.joinPath(dir, scriptName);
+		const path = fm.joinPath(dir, "Count Up Widget.js");
 		
 		fm.writeString(path, scriptContent);
 		
-		console.log(`Successfully updated ${scriptName} from ${repoUrl}`);
+		console.log("Updated Script")
+		await displayMessage("Updated Script", "", "Ok...")
 	} catch (error) {
 		console.error(`Failed to update script: ${error}`);
 	}
