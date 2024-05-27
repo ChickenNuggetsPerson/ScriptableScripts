@@ -3,6 +3,8 @@
 // icon-color: cyan; icon-glyph: magic;
 ///<reference path="../index.d.ts" />
 
+// This is super cool text added in the update
+
 let files = {
     resetDate: {
         name: "resetDate.txt",
