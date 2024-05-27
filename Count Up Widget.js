@@ -3,7 +3,7 @@
 // icon-color: cyan; icon-glyph: magic;
 ///<reference path="../index.d.ts" />
 
-// Cool Stuff
+// Other cool stuff
 
 let files = {
     resetDate: {
@@ -15,8 +15,6 @@ let files = {
         value: []
     }
 }
-
-
 
 
 
@@ -312,7 +310,7 @@ async function update() {
 		let fileManager = FileManager.iCloud()		
 
 		const dir = fileManager.documentsDirectory();
-		const path = fileManager.joinPath(dir, "Count Up Widget.js");
+		const path = fileManager.joinPath(dir, Script.name() + ".js");
 		
 		fileManager.writeString(path, scriptContent);
 		
@@ -324,12 +322,6 @@ async function update() {
 
 
 }
-
-//  2024-03-27T14:38:26.160Z 
-
-
-// 2024-05-01T03:29:26.177Z
-
 
 
 
