@@ -266,6 +266,17 @@ function editHistory(oldEntry, newEntry) {
 	console.log("Editing History: " + oldEntry + " -> " + newEntry)
 }
 
+
+
+function createRow(text) {
+    let row = new UITableRow()
+    
+    
+    let cell = UITableCell.text(text)
+    cell.leftAligned()
+    row.addCell(cell)
+    return row
+}
 async function historyMenu() {
 	// let index = await chooseFromList("Reset History", "Close", [
 	// 	"View",
@@ -276,20 +287,39 @@ async function historyMenu() {
 	table.showSeparators = true
 
 	let histData = getHistory()
+    
+    table.addRow(createRow(histData.length + " Total Entries"))
+    
+    
+    var avg = 0
+    var avgCount = 0
+    
+    let prevDay = new Date(histData[0])
+    for (let i = 1; i < histData.length; i++) {
+        let day = new Date(histData[i])
+        avg += getDayCountUp(day, prevDay)
+        prevDay = day
+        avgCount++
+    }
+    avg /= avgCount
+    table.addRow(createRow("Avg of " + avg + " Days Between Resets"))
+    
+    
+    var summer = 0
+    for (let i = 0; i < histData.length; i++) {
+        if (new Date(histData[i]) > new Date("5/23/24")) {
+            summer++
+        }
+    }
+    
+    table.addRow(createRow(summer + " resets this summer"))
+    table.addRow(createRow(""))
 
 	for (let i = 0; i < histData.length; i++) {
-		let row = new UITableRow()
-		
-		let isoCell = UITableCell.text(histData[i])
-		let dateCell = UITableCell.text(new Date(histData[i]).toString())
-
-		isoCell.leftAligned()
-		dateCell.rightAligned()
-
-		row.addCell(isoCell)
-		row.addCell(dateCell)
-		
-		table.addRow(row)
+	
+		table.addRow(createRow(
+            new Date(histData[i]).toString()
+        ))
 	}
 
 	table.present(false)
@@ -436,6 +466,10 @@ async function createWidget(goalDate, countDown, widgetFamily, emoji) {
 		face.font = Font.boldSystemFont(500)
 		
 		w.size = new Size(pickedFace.length * 15, 50)
+        
+        if (widgetFamily == "small") {
+            face.textColor = new Color("#000000")
+        }
 		
 		return widget
 	}
