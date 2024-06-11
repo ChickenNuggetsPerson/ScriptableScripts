@@ -312,7 +312,7 @@ async function historyMenu() {
         }
     }
     
-    table.addRow(createRow(summer + " resets this summer"))
+    table.addRow(createRow(summer + " Resets This Summer"))
     table.addRow(createRow(""))
 
 	for (let i = 0; i < histData.length; i++) {
