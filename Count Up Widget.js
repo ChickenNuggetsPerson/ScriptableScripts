@@ -3,8 +3,6 @@
 // icon-color: cyan; icon-glyph: magic;
 ///<reference path="../index.d.ts" />
 
-// Other cool stuff
-
 let files = {
     resetDate: {
         name: "resetDate.txt",
@@ -301,7 +299,13 @@ async function historyMenu() {
         prevDay = day
         avgCount++
     }
+    
+    avg += getDayCountUp(Date(), prevDay)
+    avgCount++
+    
     avg /= avgCount
+    
+    avg = Math.floor(avg * 100) / 100
     table.addRow(createRow("Avg of " + avg + " Days Between Resets"))
     
     
@@ -661,7 +665,7 @@ function pickFace(days) {
 
 	switch (days) {
 		case 0:
-			return "(ﾟ∩ﾟ)"
+			return "(._.)"
 		case 1:
 			return "┌( ಠ_ಠ)┘"
 		case 2:
