@@ -425,7 +425,9 @@ async function presentWidget() {
 
 
 
-
+function isHomeScreenWidget(widgetFamily) {
+	return !(widgetFamily != "small" && widgetFamily != "medium" && widgetFamily != "large" && widgetFamily != "extraLarge")
+}
 
 
 async function createWidget(goalDate, countDown, widgetFamily, emoji) {
@@ -440,7 +442,9 @@ async function createWidget(goalDate, countDown, widgetFamily, emoji) {
 	const mainStack = widget.addStack()
 	const w = mainStack.addStack()
 	
-	if (widgetFamily != "small" && widgetFamily != "medium" && widgetFamily != "large" && widgetFamily != "extraLarge") {
+	if (
+		!isHomeScreenWidget(widgetFamily)
+	) {
 		w.backgroundColor = new Color("#000000")
 		w.addAccessoryWidgetBackground = true;
 		w.cornerRadius = 10
@@ -471,7 +475,7 @@ async function createWidget(goalDate, countDown, widgetFamily, emoji) {
 		
 		w.size = new Size(pickedFace.length * 15, 50)
         
-        if (widgetFamily == "small") {
+        if (isHomeScreenWidget(widgetFamily)) {
             face.textColor = new Color("#000000")
         }
 		
